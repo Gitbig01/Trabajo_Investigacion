@@ -85,6 +85,7 @@ Funcion Ejercicio2
 	
 	Escribir "La ganancia obtenida por el productor es de $", ganancia
 FinFuncion
+
 //--------------------------------------------------------------------------------------------------------
 //3) Dado dos números obtener el residuo sin el operador mod, 
 //Entrada recibo los numeros para calcular el reciduo
@@ -179,6 +180,30 @@ Funcion ComparacionDeNum(n1,n2,n3,n4)
 	FinSi
 FinFuncion
 //----------------------------------------------------------------------------------------------------
+//8) El banco POO ha decidido aumentar el límite de crédito de las tarjetas de crédito
+//de sus clientes, para esto considera que:
+//Si su cliente tiene tarjeta tipo 1, el aumento será del $100 .
+//Si tiene tipo 2 el aumento será del $200
+//Si tiene tipo 3, el aumento será del $300
+//Para cualquier otro tipo será del 500
+//Realizar un algoritmo que ayude al banco a determinar el nuevo límite
+//de crédito que tendrá una persona en su tarjeta considerando que
+//después del aumento se tendrá que subir 10% adicionales a todas las tarjetas
+
+	funcion nuevo_limite=Ejercicio8
+		Definir tipo Como Entero
+		Definir credito,valores, nuevo_limite, adicional Como Real
+		tipo =0; credito= 0.0; aumento= 0.0; nuevo_limite=0.0;adicional=0.1
+		escribir "Ingrese su límite de crédito actual"
+		Leer credito
+		Escribir "Ingrese el tipo de tarjeta"
+		Leer tipo_credito
+		creditos(aumento)
+		adicional= credito*adicional
+		nuevo_limite = aumento + credito + adicional
+		
+FinFuncion
+//----------------------------------------------------------------------------------------------------
 //6) El banco XYZ ha decidido aumentar el límite de crédito de las tarjetas de crédito
 //de sus clientes, para esto considera que:
 //Si su cliente tiene tarjeta tipo 1, el aumento será del 25%.
@@ -201,28 +226,41 @@ FinFuncion
 //Fin Segun
 //nuevo_salario <- aumento + saldo
 //Salida: nuevo_salario
-
-Funcion Ejercicio6
+Funcion nuevo_limite=Ejercicio6
 	Definir tipo Como Entero
 	Definir saldo,nuevo_salario,aumento Como Real
-	tipo=0;saldo=0.0;nuevo_salario=0.0;aumento=0.0
-	Escribir "Ingrese su saldo actual"
-	Leer saldo
+	tipo=0;saldo=0.0;nuevo_salario=0.0;aumento=0.0; adicional=0.20
+	Escribir "Ingrese su límite de crédito actual"
+	Leer credito
 	Escribir "Ingrese su tipo de tarjeta"
 	Leer tipo
+	creditos(nuevo_limite)
+	adicional= credito*adicional
+	nuevo_limite = aumento + credito + adicional
+	
+FinFuncion
+SubProceso creditos(aumento)
 	Segun tipo Hacer
 		1:
-			aumento <- ( saldo * 25)/100
+			aumento = credito*0.25
 		2:
-			aumento <- ( saldo * 35)/100
+			aumento = credito*0.35
 		3:
-			aumento <- ( saldo * 40)/100
+			aumento = credito+0.40
 		De Otro Modo:
-			aumento <- ( saldo * 50)/100
+			aumento <- credito+0.50
 	Fin Segun
-	nuevo_salario <- aumento + saldo
-	Escribir "Nuevo saldo: ",nuevo_salario 
-FinFuncion
+	Segun tipo_credito Hacer
+		1:
+			aumento = 100
+		2:
+			aumento = 200
+		3:
+			aumento = 300
+		De Otro Modo:
+			aumento=500
+	Fin Segun
+FinSubProceso
 //----------------------------------------------------------------------------------------------------
 //7)Escribir un algoritmo que lea cuatro números y determine si el numero 1 es divisor del
 //numero3 Y si el numero 2 es el doble del numero4.
@@ -241,46 +279,7 @@ Funcion ComparacionDeNum2
 		Escribir "O el numero ",n2," no es el doble que el numero ",n4
 	FinSi
 FinFuncion
-//----------------------------------------------------------------------------------------------------
-//8) El banco POO ha decidido aumentar el límite de crédito de las tarjetas de crédito
-//de sus clientes, para esto considera que:
-//Si su cliente tiene tarjeta tipo 1, el aumento será del $100 .
-//Si tiene tipo 2 el aumento será del $200
-//Si tiene tipo 3, el aumento será del $300
-//Para cualquier otro tipo será del 500
-//Realizar un algoritmo que ayude al banco a determinar el nuevo límite
-//de crédito que tendrá una persona en su tarjeta considerando que
-//después del aumento se tendrá que subir 10% adicionales a todas las tarjetas
 
-funcion Ejercicio8
-	Definir tipo_tarjeta Como Entero
-	Definir credito,aumento, nuevo_limite, adicional Como Real
-	tipo_tarjeta =0; credito= 0.0; aumento= 0.0; nuevo_limite=0.0;adicional=0.1
-	escribir "Ingrese su límite de crédito"
-	Leer credito
-	Escribir "Ingrese el tipo de tarjeta"
-	Leer tipo_tarjeta
-	Si tipo_tarjeta=1 Entonces
-		aumento = 100
-		nuevo_limite= credito+aumento
-	SiNo
-		si tipo_tarjeta=2
-			aumento = 200
-			nuevo_limite= credito+aumento
-		SiNo
-			si tipo_tarjeta=3
-				aumento = 300
-				nuevo_limite= credito+aumento
-			SiNo
-				aumento=500
-			FinSi
-		FinSi
-	FinSi
-	adicional= nuevo_limite*adicional
-	nuevo_limite= nuevo_limite+adicional
-	Escribir "El nuevo límite de crédito es: ", nuevo_limite
-	
-FinFuncion
 //------------------------------------------------------------------------------------------------------
 //9) Pedir al usuario un número y mostrar si es negativo menor que -20, sino mostrar si es
 //positivo par o impar múltiplo de 7.
@@ -380,7 +379,7 @@ Funcion CompararUnNumero2
 			Escribir num," es negativo e impar"
 		SiNo
 			Si num < 0 y num mod 5=0  Entonces
-				Escribir num," es negativo y divicible para 5 "
+				Escribir num," es negativo y divisible para 5 "
 			FinSi
 		FinSi
 	FinSi
@@ -471,33 +470,28 @@ FinFuncion
 //Proceso bucle divisor = 1  hasta numero =10
 //Si 10 mod 1 = 0 Entonces 1 es divisor Asi hasta el numero 10
 //Salida Escribir Se escriben donde se cumple la condicion 
-Funcion divisor=DivisoresDeUnNumero(num)
-	Definir divisor como Entero
-	Escribir "Ingrese un número:"
-	Leer num
-	Escribir "Los divisores de ", num, " son:"
-	Para divisor <- 1 Hasta num Hacer
-		Si num MOD divisor = 0 Entonces
-			Escribir "El numero: ",divisor
-		FinSi
-	FinPara
+Funcion ContarDivisores(num)
+    Definir divisor, contador Como Entero
+    contador = 0
+    Para divisor <- 1 Hasta num Hacer
+        Si num MOD divisor = 0 Entonces
+            contador = contador + 1
+        FinSi
+    FinPara
+    Escribir "La cantidad de números divisibles para ", num, " es: ", contador
 FinFuncion
 //16) Escribir un algoritmo que presente la suma de los divisores de un numero
-funcion Ejercicio16
-	Definir num, suma, divisor Como Entero
-	
-	Escribir "Ingrese un número: "
-	Leer num
-	
-	suma = 0
-	
-	Para divisor = 1 Hasta num Hacer
-		Si num % divisor = 0 Entonces
-			suma = suma + divisor
-		FinSi
-	FinPara
-	
-	Escribir "La suma de los divisores de ", num, " es: ", suma
+	Funcion DivisoresDeUnNumero(num)
+		Definir divisor Como Entero
+		Escribir "Ingrese un número:"
+		Leer num
+		Escribir "Los divisores de ", num, " son:"
+		ContarDivisores(num)
+		Para divisor <- 1 Hasta num Hacer
+			Si num MOD divisor = 0 Entonces
+				Escribir "El número: ", divisor
+			FinSi
+		FinPara
 FinFuncion
 
 //------------------------------------------------------------------------------------------------------------
@@ -507,18 +501,16 @@ FinFuncion
 //Si numero mod divisor = 0 entonces es divisible para ese numero 
 //se guarda en contador
 //Salida:Se muestra contador
-Funcion contador=ContadorDeDivisores(num)
-	Definir  divisor,contador Como Entero
-	Escribir "Ingresa un numero: "
-	Leer num 
-	Escribir "La cantidad de numeros divisibles para ",num," es:"
-	contador=0
-	Para divisor=1 Hasta num Con Paso 1 Hacer
-		Si num mod divisor = 0 Entonces
-			contador=contador+1
-		FinSi
-	FinPara
-	Escribir contador
+Funcion SumaDivisores(num)
+    Definir  suma Como Entero
+    suma = 0
+    ContarDivisores(num)
+    Para divisor <- 1 Hasta num Hacer
+        Si num MOD divisor = 0 Entonces
+            suma = suma + divisor
+        FinSi
+    FinPara
+    Escribir "La suma de los divisores de ", num, " es: ", suma
 FinFuncion
 //------------------------------------------------------------------------------------------------------------
 //18) Escribir un algoritmo que indique si un número es perfecto
@@ -554,57 +546,45 @@ FinFuncion
 //Cerrar el bucle
 //Si Contador = 2 
 //Salida Es un numero primo 
+Funcion suma= SumaDivisor(num)
+    Definir divisor, suma Como Entero
+    suma = 0
+    Para divisor <- 1 Hasta num Hacer
+        Si num MOD divisor = 0 Entonces
+            suma = suma + divisor
+        FinSi
+    FinPara
+FinFuncion
+
 Funcion NumeroPrimo(num)
-	Definir divisor,contador Como Entero
-	Escribir "Escriba un numero"
-	Leer num 
-	contador = 0
-	Para divisor<-1 Hasta num Hacer
-		Si num mod divisor = 0 Entonces
-			contador = contador + 1
-		FinSi
-	FinPara
-	Si contador = 2 Entonces
-		Escribir "El numero: ",num," es primo"
-	SiNo
-		Escribir "El numero: ",num," no es primo"
-	FinSi
+    Definir contador Como Entero
+    Escribir "Escriba un numero"
+    Leer num
+    contador = SumaDivisor(num)
+    Si contador = num + 1 Entonces
+        Escribir "El número ", num, " es primo."
+    Sino
+        Escribir "El número ", num, " no es primo."
+    FinSi
 FinFuncion
 //-------------------------------------------------------------------------------------------------------------
 //20) Dado dos números determinar si son primos gemelos.
 //Nota: Dos números son primos gemelos si los dos son primos y su resta en valor absoluto es
 //igual a 2. Ejemplo: 7 y 5
-funcion Ejercicio20
-	Definir num1, num2, i, j, esPrimo1, esPrimo2 Como Entero
-	
-    Escribir "Ingrese el primer número: "
-    Leer num1
-	
-    Escribir "Ingrese el segundo número: "
-    Leer num2
-	
-    esPrimo1 = 1
-    esPrimo2 = 1
-	
-    Para i = 2 Hasta num1 / 2 Hacer
-        Si num1 % i = 0 Entonces
-            esPrimo1 = 0
-            
-        FinSi
-    FinPara
-	
-    Para j = 2 Hasta num2 / 2 Hacer
-        Si num2 % j = 0 Entonces
-            esPrimo2 = 0
-            
-        FinSi
-    FinPara
-	
-    Si esPrimo1 = 1 Y esPrimo2 = 1 Y Abs(num1 - num2) = 2 Entonces
-        Escribir num1, " y ", num2, " son primos gemelos."
-    Sino
-        Escribir num1, " y ", num2, " no son primos gemelos."
-    FinSi
+Funcion Ejercicio20
+Definir num1, num2 Como Entero
+
+Escribir "Ingrese el primer número: "
+Leer num1
+
+Escribir "Ingrese el segundo número: "
+Leer num2
+
+Si SumaDivisor(num1) = num2 + 1 Y SumaDivisor(num2) = num1 + 1 Y Abs(num1 - num2) = 2 Entonces
+	Escribir num1, " y ", num2, " son primos gemelos."
+Sino
+	Escribir num1, " y ", num2, " no son primos gemelos."
+FinSi
 FinFuncion
 
 //----------------------------------------------------------------------------------------------------------------
@@ -621,27 +601,15 @@ FinFuncion
 //Si contadores son iguales ç
 //Salida los numeros son amigos
 Funcion NumerosAmigos
-	Definir num1,num2,divisor,contador1,contador2 Como Entero
-	Escribir "Ingresa dos numeros "
-	Leer num1,num2
-	contador1=0
-	contador2=0
-	Para divisor<-1 Hasta num1 Hacer
-		Si num1 mod divisor = 0 Entonces
-			contador1= (contador1+ divisor) - num 
-		FinSi
-	FinPara
-	Para divisor<-1 Hasta num2 Hacer
-		Si num2 mod divisor = 0 Entonces
-			contador2= (contador2+ divisor) - num 
-		FinSi
-	FinPara
+    Definir num1, num2 Como Entero
+    Escribir "Ingresa dos números "
+    Leer num1, num2
 	
-	Si contador1 = contador2 Entonces
-		Escribir "Los numeros ",num1," y ",num2," son numeros amigos"
-	Sino 
-		Escribir "Los numeros ingresados no son numeros amigos"
-	FinSi
+    Si SumaDivisor(num1) = num2 Y SumaDivisor(num2) = num1 Entonces
+        Escribir "Los números ", num1, " y ", num2, " son números amigos."
+    Sino 
+        Escribir "Los números ingresados no son números amigos."
+    FinSi
 FinFuncion
 //-----------------------------------------------------------------------
 //	2) La asociación de vinicultores tiene como política fijar un precio inicial al kilo
@@ -798,67 +766,6 @@ FinFuncion
 //nuevo_salario <- aumento + saldo
 //Salida: nuevo_salario
 
-Funcion salario_tarjeta
-	Definir tipo Como Entero
-	Definir saldo,nuevo_salario,aumento Como Real
-	tipo=0;saldo=0.0;nuevo_salario=0.0;aumento=0.0
-	Escribir "Ingrese su saldo actual"
-	Leer saldo
-	Escribir "Ingrese su tipo de tarjeta"
-	Leer tipo
-	Segun tipo Hacer
-		1:
-			aumento <- ( saldo * 25)/100
-		2:
-			aumento <- ( saldo * 35)/100
-		3:
-			aumento <- ( saldo * 40)/100
-		De Otro Modo:
-			aumento <- ( saldo * 50)/100
-	Fin Segun
-	nuevo_salario <- aumento + saldo
-	Escribir "Nuevo saldo: ",nuevo_salario 
-FinFuncion
-//----------------------------------------------------------------------------------------------------
-//8) El banco POO ha decidido aumentar el límite de crédito de las tarjetas de crédito
-//de sus clientes, para esto considera que:
-//Si su cliente tiene tarjeta tipo 1, el aumento será del $100 .
-//Si tiene tipo 2 el aumento será del $200
-//Si tiene tipo 3, el aumento será del $300
-//Para cualquier otro tipo será del 500
-//Realizar un algoritmo que ayude al banco a determinar el nuevo límite
-//de crédito que tendrá una persona en su tarjeta considerando que
-//después del aumento se tendrá que subir 10% adicionales a todas las tarjetas
-
-funcion banco
-	Definir tipo_tarjeta Como Entero
-	Definir credito,aumento, nuevo_limite, adicional Como Real
-	tipo_tarjeta =0; credito= 0.0; aumento= 0.0; nuevo_limite=0.0;adicional=0.1
-	escribir "Ingrese su límite de crédito"
-	Leer credito
-	Escribir "Ingrese el tipo de tarjeta"
-	Leer tipo_tarjeta
-	Si tipo_tarjeta=1 Entonces
-		aumento = 100
-		nuevo_limite= credito+aumento
-	SiNo
-		si tipo_tarjeta=2
-			aumento = 200
-			nuevo_limite= credito+aumento
-		SiNo
-			si tipo_tarjeta=3
-				aumento = 300
-				nuevo_limite= credito+aumento
-			SiNo
-				aumento=500
-			FinSi
-		FinSi
-	FinSi
-	adicional= nuevo_limite*adicional
-	nuevo_limite= nuevo_limite+adicional
-	Escribir "El nuevo límite de crédito es: ", nuevo_limite
-	
-FinFuncion
 //------------------------------------------------------------------------------------------------------
 //10) La asociación de vinicultores tiene como política fijar un precio inicial al quintal de
 //pitajaya, la cual se clasifica en tipos "Amarilla" y "Colorada", y además en tamaños 1 y 2.
@@ -1206,27 +1113,6 @@ funcion cubo
     
     
     Escribir "Suma de cubos:", sumaCubos
-FinFuncion
-//-----------------------------------------------------------------------------------------------------------------------------------
-//10) Leer una secuencia de números hasta que se ingrese un numero negativo
-//y almacenarlos en arreglo. Se pide recorrer el arreglo y cambiar cada
-//elemento del arreglo por su doble.
-//Ejemplo: secuencia: 4,3,6,9,0
-//arreglo=[4,3,6,9] = [8,6,12,18]
-funcion doble=dobles
-	Dimension arreglo[5]
-	Definir num Como Entero
-	Definir doble Como Entero
-	doble=0
-	i=0
-	Escribir "Ingrese un número (termine con un negativo)"
-	Leer num
-	arreglo[i]=num
-	Mientras num >= 0 Hacer
-		doble = doble+(num*2)
-		i=i+1
-		Leer num
-	FinMientras
 FinFuncion
 
 //----------------------------------------------------------------------------------------------------------------------------------
@@ -1826,7 +1712,9 @@ Algoritmo Proyecto
 							Esperar 6 Segundos
 						"6":
 							Escribir "6)Banco XYZ aumento del límite de crédito de las tarjetas de crédito"
-							salario_tarjeta
+							nuevo_limite=Ejercicio6
+							Escribir "El nuevo límite de crédito es: ",nuevo_limite
+							//----------------------------------------
 							Esperar 6 Segundos
 						"7":
 							Escribir "7)Algoritmo que determine si un numero es divisor del otro y uno es el doble del otro"
@@ -1834,7 +1722,8 @@ Algoritmo Proyecto
 							Esperar 6 Segundos
 						"8":
 							Escribir "8)Banco Poo aumento del límite de crédito de las tarjetas de crédito"
-							banco
+							nuevo_limite=Ejercicio8
+							Escribir "El nuevo límite de crédito es: ", nuevo_limite
 							Esperar 6 Segundos
 						"9":
 							Escribir "9)Mostrar si un numero es negativo menor que -20"
@@ -1862,15 +1751,15 @@ Algoritmo Proyecto
 							Esperar 6 Segundos
 						"15":
 							Escribir "15)Algoritmo que presente los divisores de un numero"
-							contador=DivisoresDeUnNumero(5)
+							ContarDivisores(8)
 							Esperar 6 Segundos
 						"16":
 							Escribir "16)Algoritmo que presente la suma de los divisores de un numero"
-							suma=divisores
+							DivisoresDeUnNumero(12)
 							Esperar 6 Segundos
 						"17":
 							Escribir "17)Algoritmo que presente la cantidad de los divisores de un numero"
-							contador=ContadorDeDivisores(10)
+							SumaDivisores(9)						
 							Esperar 6 Segundos
 						"18":
 							Escribir "18)Algoritmo que indique si un número es perfecto"
