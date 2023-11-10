@@ -1,6 +1,6 @@
-//1) Determinar cuánto se debe pagar por cierta cantidad de colas, considerando que si son más
-//	de 23 colas, el costo por unidad es de $0,50 caso contrario el precio será 20% mas.
-//Al costo resultante calcular el 12% del iva. Se pide presentar: cantidad comprada, el costo ´por
+//1) Determinar cuÃ¡nto se debe pagar por cierta cantidad de colas, considerando que si son mÃ¡s
+//	de 23 colas, el costo por unidad es de $0,50 caso contrario el precio serÃ¡ 20% mas.
+//Al costo resultante calcular el 12% del iva. Se pide presentar: cantidad comprada, el costo Â´por
 //	unidad, el total sin iva el iva y el total a pagar.
 //Entrada recibo la variable cantidad
 //Proceso segun cantidad < > precio unitario
@@ -23,25 +23,25 @@ Funcion pagar=CalculaPrecioColas(Cantidad)
 	Escribir "Total a pagar: ",pagar,"$"
 FinFuncion
 //---------------------------------------------------------------------------
-//	2) La asociación de vinicultores tiene como política fijar un precio inicial al kilo
-//	de uva, la cual se clasifica en tipos A y B, y además en tamaños 1 y 2.
-//	Cuando se realiza la venta del producto, ésta es de un solo tipo y tamaño, se
-//	requiere determinar cuánto recibirá un productor por la uva que entrega en un
+//	2) La asociaciÃ³n de vinicultores tiene como polÃ­tica fijar un precio inicial al kilo
+//	de uva, la cual se clasifica en tipos A y B, y ademÃ¡s en tamaÃ±os 1 y 2.
+//	Cuando se realiza la venta del producto, Ã©sta es de un solo tipo y tamaÃ±o, se
+//	requiere determinar cuÃ¡nto recibirÃ¡ un productor por la uva que entrega en un
 //embarque, considerando lo siguiente:Si es de tipo A, se le cargan 20 al precio
-//	inicial cuando es de tamaño 1; y 30 si es de tamaño 2. Si es de tipo B, se rebajan
-//	30 cuando es de tamaño 1, y 50 cuando es de tamaño 2.
+//	inicial cuando es de tamaÃ±o 1; y 30 si es de tamaÃ±o 2. Si es de tipo B, se rebajan
+//	30 cuando es de tamaÃ±o 1, y 50 cuando es de tamaÃ±o 2.
 //	Realice un algoritmo para determinar la ganancia obtenida
 
-//Entrada:	tipo=""(leer);tamaño=0(leer);precio=0.0(leer);ganacia=0.0;descuento=0.0;aumento=0.0
+//Entrada:	tipo=""(leer);tamaÃ±o=0(leer);precio=0.0(leer);ganacia=0.0;descuento=0.0;aumento=0.0
 //Proceso: Si tipo = "A" Entonces
-//Si tamaño = 1 Entonces
+//Si tamaÃ±o = 1 Entonces
 //	aumento <- 20.0
 //Sino
 //	aumento <- 30.0
 //FinSi
 //Sino 
 //	Si tipo = "B" Entonces
-//		Si tamaño = 1 Entonces
+//		Si tamaÃ±o = 1 Entonces
 //			aumento <- -30.0
 //		Sino
 //			aumento <- -50.0
@@ -52,42 +52,71 @@ FinFuncion
 //ganancia = precio + descuento
 //Salida: ganancia
 
-Funcion Ejercicio2
-	Definir tipo Como Caracter
-	Definir tamaño Como Entero
-    Definir  ganancia, descuento, aumento Como Real
-	tipo="";tamaño=0;precio=0.0;ganacia=0.0;descuento=0.0; aumento=0.0
-	escribir "Ingrese el precio inicial"
-	Leer precio
-    Escribir "Ingrese el tipo de uva (A o B):"
-    Leer tipo
-    Escribir "Ingrese el tamaño de uva (1 o 2):"
-    Leer tamaño
+Funcion Ejercicio2(precio,tipo,tamaÃ±o)
+    Definir  ganancia, descuento Como Real
 	
+	extra=uvas_pitajaya(precio,tipo,tamaÃ±o)
+	descuento = (extra * (-1))
+	ganancia = precio + descuento
+	Escribir "La ganancia obtenida por el productor es de $", ganancia
+FinFuncion	
+//------------------------------------------------------------------------------------------------------
+//10) La asociaciÃ³n de vinicultores tiene como polÃ­tica fijar un precio inicial al quintal de
+//pitajaya, la cual se clasifica en tipos "Amarilla" y "Colorada", y ademÃ¡s en tamaÃ±os 1 y 2.
+//Cuando se realiza la venta del producto, Ã©sta es de un solo tipo y tamaÃ±o, se requiere
+//determinar cuÃ¡nto recibirÃ¡ un productor por la pitajaya que entrega en un embarque,
+//considerando lo siguiente:
+//? Si es de tipo Amarilla, se le cargan $10 al precio inicial cuando es de tamaÃ±o 1; y 15% mas $5
+//si es de tamaÃ±o 2
+//? Si es de tipo Colorada, se rebajan $20 cuando es de tamaÃ±o 1, y 20% cuando es de tamaÃ±o
+//2. Sea tipo Amarilla y Colorada se debe se aplicar un descuento del 5% y el 12% del IVA.
+//Realice un algoritmo para determinar el precio de embarque
+funcion Ejercicio10(precio,tipo,tamaÃ±o)
+	
+    Definir  descuento, extra Como Real
+    Definir iva Como Real
+	extra=uvas_pitajaya(precio,tipo,tamaÃ±o)
+    descuento =  extra* 0.05
+    iva =  extra* 0.12
+	extra=  extra+ descuento + iva
+    Escribir "El precio final del embarque es:", extra
+FinFuncion
+funcion extra=uvas_pitajaya(precio,tipo,tamaÃ±o)
+	porcentajeAmarilla1 = 0.1; porcentajeAmarilla2 = 0.15; descuentoColorada1 = 0.2; descuentoColorada2 = 0.2
 	
     Si tipo = "A" Entonces
-		Si tamaño = 1 Entonces
-            aumento <- 20.0
+		Si tamaÃ±o = 1 Entonces
+			extra  = 20.0
         Sino
-            aumento <- 30.0
+			extra= 30.0
         FinSi
     Sino 
 		Si tipo = "B" Entonces
-			Si tamaño = 1 Entonces
-				aumento <- -30.0
+			Si tamaÃ±o = 1 Entonces
+				extra= -30.0
 			Sino
-				aumento <- -50.0
+				extra = -50.0
 			FinSi
 		FinSi
-	FinSi	
-	descuento = (aumento * (-1))
-	ganancia = precio + descuento
+	FinSi
 	
-	Escribir "La ganancia obtenida por el productor es de $", ganancia
+	Si tipo = "Amarilla" Entonces
+        Si tamaÃ±o = 1 Entonces
+            extra = precio + porcentajeAmarilla1
+        Sino
+            extra = precio + (precio * porcentajeAmarilla2) + 5
+        FinSi
+    FinSi
+	Si tipo= "Colorada" Entonces
+		Si tamaÃ±o = 1 Entonces
+            extra = precio - descuentoColorada1
+        Sino
+            extra = precio - (precio * descuentoColorada2 )
+        FinSi
+	FinSi
 FinFuncion
-
 //--------------------------------------------------------------------------------------------------------
-//3) Dado dos números obtener el residuo sin el operador mod, 
+//3) Dado dos nÃºmeros obtener el residuo sin el operador mod, 
 //Entrada recibo los numeros para calcular el reciduo
 	//Proceso ((num1 / num2 )* num2 )-num1
 	//Salida reciduo
@@ -96,17 +125,17 @@ FinFuncion
 		Escribir "El reciduo es: ",reciduo
 FinFuncion
 //--------------------------------------------------------------------
-//4) El consultorio del Dr. Paez tiene como política cobrar la consulta con
-//		base en el número de cita, de la siguiente forma:
+//4) El consultorio del Dr. Paez tiene como polÃ­tica cobrar la consulta con
+//		base en el nÃºmero de cita, de la siguiente forma:
 //			Las tres primeras citas a $200.00 c/u.
 //			Las siguientes dos citas a $150.00 c/u.
 //			Las tres siguientes citas a $100.00 c/u.
 //			Las restantes a $50.00 c/u, mientras dure el tratamiento.
 //			Se requiere un algoritmo para determinar:
-//						Cuánto pagará el paciente por la cita.
+//						CuÃ¡nto pagarÃ¡ el paciente por la cita.
 //						El monto de lo que ha pagado el paciente por el tratamiento.
-//						Para la solución de este problema se requiere saber qué número de cita se efectuará, con el
-//							cual se podrá determinar el costo que tendrá la consulta y cuánto se ha gastado en el
+//						Para la soluciÃ³n de este problema se requiere saber quÃ© nÃºmero de cita se efectuarÃ¡, con el
+//							cual se podrÃ¡ determinar el costo que tendrÃ¡ la consulta y cuÃ¡nto se ha gastado en el
 //							tratamiento.
 //Entrada:	cita=0(leer); precio=0.0;total=0.0 ; valor_cita=0.0
 //Proceso:
@@ -131,47 +160,48 @@ FinFuncion
 //Salida: Escribir "Numero de cita: ",cita
 //Escribir "Costo de la consulta: ",precio
 //Escribir "Costo del tratamiento: ",valor_cita
-Funcion Ejercicio4 
+Funcion consulta 
 	Definir cita como entero
 	Definir precio,total,valor_cita Como Real
 	cita=0; precio=0.0;total=0.0
 	Escribir "Ingrese el numero de cita "
 	Leer cita
-	
+	//Las tres primeras citas a $200.00 c/u.
+//			Las siguientes dos citas a $150.00 c/u.
+//			Las tres siguientes citas a $100.00 c/u.
+//			Las restantes a $50.00 c/u, mientras dure el tratamiento.
+//			Se requiere un algoritmo para determinar:
+//						CuÃ¡nto pagarÃ¡ el paciente por la cita.
 	Si cita <= 3 Entonces
-		precio <- 200.00
-		Si cita > 3 y cita <= 5 Entonces
-			precio <- 150.00
-			total <-(cita - 3) * 150.00
-			valor_cita <- 600.00 + total
-			Si cita > 5 y cita <= 8 Entonces
-				precio <- 100.00
-				total <-(cita - 5) * 100.00
-				valor_cita <- 1100.00 + total
-				Si cita > 8 Entonces
-					precio <- 50.00
-					total <-(cita - 8) * 50.00
-					valor_cita <- 1400.00 + total
-				FinSi
-			FinSi
-		FinSi
+		precio = 200.00
+	FinSi
+	Si cita > 3 y cita <= 5 Entonces
+		precio = 150.00
+		total = (cita - 3) * 150.00
+	FinSi
+	Si cita > 5 y cita <= 8 Entonces
+		precio = 100.00
+		total = (cita - 5) * 100.00
+	FinSi
+	Si cita > 8 Entonces
+		precio = 50.00
+		total =(cita - 8) * 50.00
 	FinSi
 	
 	Escribir "Numero de cita: ",cita
 	Escribir "Costo de la consulta: ",precio
-	Escribir "Costo del tratamiento: ",valor_cita
+	Escribir "Costo del tratamiento: ",total
 	
 FinFuncion
 //----------------------------------------------------------------------------------------------------
-//5)Escribir un algoritmo que lea cuatro números y determine si el numero 1
-//es la mitad del número 2; Y si el numero 3 es divisor del numero4.
+//5)Escribir un algoritmo que lea cuatro nÃºmeros y determine si el numero 1
+//es la mitad del nÃºmero 2; Y si el numero 3 es divisor del numero4.
 //Entrada n1=0[leer] n2=0[leer] n3=0[leer] n4=0[leer] 
 //Proceso Si n1/2==n2 y n3 mod n4=0 Entonces
 //Salida Se muestra un mensaje
-Funcion ComparacionDeNum(n1,n2,n3,n4)
-	Escribir "Escriba cuatro numeros"
-	Leer n1,n2,n3,n4
-	Si n1/2==n2 y n3 mod n4=0 Entonces
+Funcion Comparacion1(n1,n2,n3,n4)
+	resp=divisibles(n1,n2,n3,n4)
+	Si resp=1 Entonces
 		Escribir "La mitad numero ",n1," es el numero ",n2
 		Escribir "Y el numero ",n3," es divisible para ",n4
 	SiNo
@@ -179,40 +209,63 @@ Funcion ComparacionDeNum(n1,n2,n3,n4)
 		Escribir "O el numero ",n3," no es divisible para ",n4
 	FinSi
 FinFuncion
-//----------------------------------------------------------------------------------------------------
-//8) El banco POO ha decidido aumentar el límite de crédito de las tarjetas de crédito
-//de sus clientes, para esto considera que:
-//Si su cliente tiene tarjeta tipo 1, el aumento será del $100 .
-//Si tiene tipo 2 el aumento será del $200
-//Si tiene tipo 3, el aumento será del $300
-//Para cualquier otro tipo será del 500
-//Realizar un algoritmo que ayude al banco a determinar el nuevo límite
-//de crédito que tendrá una persona en su tarjeta considerando que
-//después del aumento se tendrá que subir 10% adicionales a todas las tarjetas
 
-	funcion nuevo_limite=Ejercicio8
-		Definir tipo Como Entero
-		Definir credito,valores, nuevo_limite, adicional Como Real
-		tipo =0; credito= 0.0; aumento= 0.0; nuevo_limite=0.0;adicional=0.1
-		escribir "Ingrese su límite de crédito actual"
-		Leer credito
-		Escribir "Ingrese el tipo de tarjeta"
-		Leer tipo_credito
-		creditos(aumento)
-		adicional= credito*adicional
-		nuevo_limite = aumento + credito + adicional
-		
+//7)Escribir un algoritmo que lea cuatro nÃºmeros y determine si el numero 1 es divisor del
+//numero3 Y si el numero 2 es el doble del numero4.
+//Entrada n1=0[leer] n2=0[leer] n3=0[leer] n4=0[leer] 
+//Proceso Si n1 mod n3=0 y n2 == n4*2 Entonces
+//Salida Se muestra un mensaje
+Funcion Comparacion2(n1,n2,n3,n4)
+	resp=divisibles(n1,n2,n3,n4)
+	Si resp=2 Entonces
+		Escribir "El numero ",n1," es divisible para ",n3
+		Escribir "Y el numero ",n2," es el doble que el numero ",n4
+	SiNo
+		Escribir "El numero ",n1," no es divisible para ",n3
+		Escribir "O el numero ",n2," no es el doble que el numero ",n4
+	FinSi
+FinFuncion
+funcion resp=divisibles(n1,n2,n3,n4)
+	Si n1/2==n2 y n3 mod n4=0 Entonces
+		resp = 1
+	SiNo 
+		Si  n1 mod n3=0 y n2 == n4*2 Entonces
+			resp = 2
+		FinSi
+	FinSi
 FinFuncion
 //----------------------------------------------------------------------------------------------------
-//6) El banco XYZ ha decidido aumentar el límite de crédito de las tarjetas de crédito
+//8) El banco POO ha decidido aumentar el lÃ­mite de crÃ©dito de las tarjetas de crÃ©dito
 //de sus clientes, para esto considera que:
-//Si su cliente tiene tarjeta tipo 1, el aumento será del 25%.
-//Si tiene tipo 2 el aumento será del 35%
-//Si tiene tipo 3, el aumento será del 40%
-//Para cualquier otro tipo será del 50%
-//Se pide realizar un algoritmo que ayude al banco a determinar el nuevo límite
-//de crédito que tendrá una persona en su tarjeta considerando que después
-//del aumento de porcentaje se tendrá que subir $20 adicionales a todas las tarjetas
+//Si su cliente tiene tarjeta tipo 1, el aumento serÃ¡ del $100 .
+//Si tiene tipo 2 el aumento serÃ¡ del $200
+//Si tiene tipo 3, el aumento serÃ¡ del $300
+//Para cualquier otro tipo serÃ¡ del 500
+//Realizar un algoritmo que ayude al banco a determinar el nuevo lÃ­mite
+//de crÃ©dito que tendrÃ¡ una persona en su tarjeta considerando que
+//despuÃ©s del aumento se tendrÃ¡ que subir 10% adicionales a todas las tarjetas
+
+funcion nuevo_limite=Ejercicio8
+	Definir valores, nuevo_limite, adicional Como Real
+	tipo_tareta =0; credito= 0.0; aumento= 0.0; nuevo_limite=0.0;adicional=0.1
+	Escribir "Ingrese su lÃ­mite de crÃ©dito actual"
+	Leer credito
+	Escribir "Ingrese su tipo de tarjeta"
+	Leer tipo_tarjeta
+	aumento=creditos
+	adicional= credito*adicional
+	nuevo_limite = aumento + credito + adicional
+FinFuncion
+//----------------------------------------------------------------------------------------------------
+//6) El banco XYZ ha decidido aumentar el lÃ­mite de crÃ©dito de las tarjetas de crÃ©dito
+//de sus clientes, para esto considera que:
+//Si su cliente tiene tarjeta tipo 1, el aumento serÃ¡ del 25%.
+//Si tiene tipo 2 el aumento serÃ¡ del 35%
+//Si tiene tipo 3, el aumento serÃ¡ del 40%
+//Para cualquier otro tipo serÃ¡ del 50%
+//Se pide realizar un algoritmo que ayude al banco a determinar el nuevo lÃ­mite
+//de crÃ©dito que tendrÃ¡ una persona en su tarjeta considerando que despuÃ©s
+//del aumento de porcentaje se tendrÃ¡ que subir $20 adicionales a todas las tarjetas
 //Entrada:
 //Proceso:Segun tipo Hacer
 //1:
@@ -227,19 +280,18 @@ FinFuncion
 //nuevo_salario <- aumento + saldo
 //Salida: nuevo_salario
 Funcion nuevo_limite=Ejercicio6
-	Definir tipo Como Entero
 	Definir saldo,nuevo_salario,aumento Como Real
 	tipo=0;saldo=0.0;nuevo_salario=0.0;aumento=0.0; adicional=0.20
-	Escribir "Ingrese su límite de crédito actual"
+	Escribir "Ingrese su lÃ­mite de crÃ©dito actual"
 	Leer credito
 	Escribir "Ingrese su tipo de tarjeta"
 	Leer tipo
-	creditos(nuevo_limite)
+	aumento=creditos
 	adicional= credito*adicional
 	nuevo_limite = aumento + credito + adicional
-	
 FinFuncion
-SubProceso creditos(aumento)
+
+Funcion aumento=creditos
 	Segun tipo Hacer
 		1:
 			aumento = credito*0.25
@@ -260,29 +312,12 @@ SubProceso creditos(aumento)
 		De Otro Modo:
 			aumento=500
 	Fin Segun
-FinSubProceso
-//----------------------------------------------------------------------------------------------------
-//7)Escribir un algoritmo que lea cuatro números y determine si el numero 1 es divisor del
-//numero3 Y si el numero 2 es el doble del numero4.
-//Entrada n1=0[leer] n2=0[leer] n3=0[leer] n4=0[leer] 
-//Proceso Si n1 mod n3=0 y n2 == n4*2 Entonces
-//Salida Se muestra un mensaje
-Funcion ComparacionDeNum2
-	Definir n1,n2,n3,n4 Como Entero
-	Escribir "Escriba cuatro numeros"
-	Leer n1,n2,n3,n4
-	Si n1 mod n3=0 y n2 == n4*2 Entonces
-		Escribir "El numero ",n1," es divisible para ",n3
-		Escribir "Y el numero ",n2," es el doble que el numero ",n4
-	SiNo
-		Escribir "El numero ",n1," no es divisible para ",n3
-		Escribir "O el numero ",n2," no es el doble que el numero ",n4
-	FinSi
 FinFuncion
 
+
 //------------------------------------------------------------------------------------------------------
-//9) Pedir al usuario un número y mostrar si es negativo menor que -20, sino mostrar si es
-//positivo par o impar múltiplo de 7.
+//9) Pedir al usuario un nÃºmero y mostrar si es negativo menor que -20, sino mostrar si es
+//positivo par o impar mÃºltiplo de 7.
 //Entrada num=0[leer]
 //Proceso Si num <= -20 Entonces
 //Si num >0 y num mod 2=0  Entonces
@@ -308,60 +343,9 @@ Funcion CompararUnNumero
 		FinSi
 	FinSi
 FinFuncion
-//------------------------------------------------------------------------------------------------------
-//10) La asociación de vinicultores tiene como política fijar un precio inicial al quintal de
-//pitajaya, la cual se clasifica en tipos "Amarilla" y "Colorada", y además en tamaños 1 y 2.
-//Cuando se realiza la venta del producto, ésta es de un solo tipo y tamaño, se requiere
-//determinar cuánto recibirá un productor por la pitajaya que entrega en un embarque,
-//considerando lo siguiente:
-//? Si es de tipo Amarilla, se le cargan $10 al precio inicial cuando es de tamaño 1; y 15% mas $5
-//si es de tamaño 2
-//? Si es de tipo Colorada, se rebajan $20 cuando es de tamaño 1, y 20% cuando es de tamaño
-//2. Sea tipo Amarilla y Colorada se debe se aplicar un descuento del 5% y el 12% del IVA.
-//Realice un algoritmo para determinar el precio de embarque
-funcion Ejercicio10
-	Definir tipo Como Caracter
-    Definir tamaño Como Entero
-    Definir precioInicial, descuento, precioFinal Como Real
-    Definir iva Como Real
-    Definir porcentajeAmarilla1, porcentajeAmarilla2, descuentoColorada1, descuentoColorada2 Como Real
-    
-    porcentajeAmarilla1 = 0.1
-    porcentajeAmarilla2 = 0.15
-    descuentoColorada1 = 0.2
-    descuentoColorada2 = 0.2
-    
-    Escribir "Ingrese el tipo de pitajaya (Amarilla o Colorada):"
-    Leer tipo
-    Escribir "Ingrese el tamaño de pitajaya (1 o 2):"
-    Leer tamaño
-    Escribir "Ingrese el precio inicial:"
-    Leer precioInicial
-    
-    Si tipo = "Amarilla" Entonces
-        Si tamaño = 1 Entonces
-            precioFinal = precioInicial + porcentajeAmarilla1
-        Sino
-            precioFinal = precioInicial + (precioInicial * porcentajeAmarilla2) + 5
-        FinSi
-    Sino
-        Si tamaño = 1 Entonces
-            precioFinal = precioInicial - descuentoColorada1
-        Sino
-            precioFinal = precioInicial - (precioInicial * descuentoColorada2 )
-        FinSi
-    FinSi
-    
-    descuento = precioFinal * 0.05
-    iva = precioFinal * 0.12
-    
-    precioFinal = precioFinal - descuento + iva
-    
-    Escribir "El precio final del embarque es:", precioFinal
-	
-FinFuncion
+
 //----------------------------------------------------------------------------------------------------
-//11) Pedir al usuario un número y mostrar si es par menor que 10, sino mostrar si es negativo e
+//11) Pedir al usuario un nÃºmero y mostrar si es par menor que 10, sino mostrar si es negativo e
 //impar o negativo divisible para 5.
 //Entrada num=0[leer]
 //Proceso Si num mod 2 =0 y num < 10 Entonces
@@ -385,18 +369,18 @@ Funcion CompararUnNumero2
 	FinSi
 FinFuncion
 //----------------------------------------------------------------------------------------------------
-//12) Fábricas "El cometa" produce artículos con claves (1, 2, 3, 4, 5 y 6). Se requiere un
+//12) FÃ¡bricas "El cometa" produce artÃ­culos con claves (1, 2, 3, 4, 5 y 6). Se requiere un
 //algoritmo para calcular los precios de venta, para esto hay que considerar lo siguiente:
-//Costo de producción = materia prima + mano de obra + gastos de fabricación.
-//Precio de venta = costo de producción + 45 % de costo de producción.
+//Costo de producciÃ³n = materia prima + mano de obra + gastos de fabricaciÃ³n.
+//Precio de venta = costo de producciÃ³n + 45 % de costo de producciÃ³n.
 //El costo de la mano de obra se obtiene de la siguiente forma: para los productos con clave 3 o
 //4 se carga 75 % del costo de la materia prima; para los que tienen clave 1 o 5 se carga 80 %, y
 //para los que tienen clave 2 o 6, 85 %.
-//Para calcular el gasto de fabricación se considera que, si el artículo que se va a producir tiene
+//Para calcular el gasto de fabricaciÃ³n se considera que, si el artÃ­culo que se va a producir tiene
 //claves 2 o 5, este gasto representa 30 % sobre el costo de la materia prima; si las claves son 3 o
 //6, representa 35 %; si las claves son 1 o 4, representa 28 %. La materia prima tiene el mismo
 //costo para cualquier clave.
-funcion Ejercicio12
+funcion materia_prima
 	Definir clave Como Entero
 	Definir CostoMateriaPrima Como Real
 	Escribir "Ingrese el costo de la materia prima"
@@ -413,7 +397,6 @@ funcion Ejercicio12
 		FinSi
 	FinSi
 	
-	// Calcular el costo de los gastos de fabricación
 	Si clave = 2 o clave = 5 Entonces
 		costoGastosFabricacion = 0.30 * costoMateriaPrima
 	Sino
@@ -424,17 +407,14 @@ funcion Ejercicio12
 		FinSi
 	FinSi
 	
-	// Calcular el costo de producción
 	costoProduccion = costoMateriaPrima + costoManoObra + costoGastosFabricacion
-	
-	// Calcular el precio de venta
 	precioVenta = costoProduccion + 0.45 * costoProduccion
 	
-	Escribir "El precio de venta del artículo es:", precioVenta
+	Escribir "El precio de venta del artÃ­culo es:", precioVenta
 FinFuncion
 //---------------------------------------------------------------------------------------------------------
-//13) Dado un número entero N, calcular e informar al usuario cuántos dígitos tiene dicho
-//número.
+//13) Dado un nÃºmero entero N, calcular e informar al usuario cuÃ¡ntos dÃ­gitos tiene dicho
+//nÃºmero.
 //Entrada contador=0,x=0[leer]
 //Proceso x/10 usamos trunc para cojer solo la parte entera
 //Por cada vuelta contador + 1
@@ -451,16 +431,16 @@ Funcion contador=CantidadDeDigitos(x)
 	Escribir "El numero tiene ",contador," digitos"
 FinFuncion
 //---------------------------------------------------------------------------------------------------------
-//14) Dado un número, determine si es capicúa.
-//Nota: un número capicúa es aquel que se lee igual hacia adelante que hacia atrás.
+//14) Dado un nÃºmero, determine si es capicÃºa.
+//Nota: un nÃºmero capicÃºa es aquel que se lee igual hacia adelante que hacia atrÃ¡s.
 funcion Ejercicio14
 	Definir num Como Entero  
-	Escribir "Ingrese un número " 
+	Escribir "Ingrese un nÃºmero " 
 	Leer num  
 	Si num MOD 11 = 0 Entonces
-		Escribir num, " es capicúa" 
+		Escribir num, " es capicÃºa" 
 	SiNo 
-		Escribir num, " no es capicúa" 
+		Escribir num, " no es capicÃºa" 
 		
 	FinSi
 FinFuncion
@@ -478,18 +458,18 @@ Funcion ContarDivisores(num)
             contador = contador + 1
         FinSi
     FinPara
-    Escribir "La cantidad de números divisibles para ", num, " es: ", contador
+    Escribir "La cantidad de nÃºmeros divisibles para ", num, " es: ", contador
 FinFuncion
 //16) Escribir un algoritmo que presente la suma de los divisores de un numero
 	Funcion DivisoresDeUnNumero(num)
 		Definir divisor Como Entero
-		Escribir "Ingrese un número:"
+		Escribir "Ingrese un nÃºmero:"
 		Leer num
 		Escribir "Los divisores de ", num, " son:"
 		ContarDivisores(num)
 		Para divisor <- 1 Hasta num Hacer
 			Si num MOD divisor = 0 Entonces
-				Escribir "El número: ", divisor
+				Escribir "El nÃºmero: ", divisor
 			FinSi
 		FinPara
 FinFuncion
@@ -513,14 +493,14 @@ Funcion SumaDivisores(num)
     Escribir "La suma de los divisores de ", num, " es: ", suma
 FinFuncion
 //------------------------------------------------------------------------------------------------------------
-//18) Escribir un algoritmo que indique si un número es perfecto
-//Nota: un número es perfecto cuando la suma de los divisores del número incluido el 1 y
-//excluido el propio número es igual al numero
+//18) Escribir un algoritmo que indique si un nÃºmero es perfecto
+//Nota: un nÃºmero es perfecto cuando la suma de los divisores del nÃºmero incluido el 1 y
+//excluido el propio nÃºmero es igual al numero
 //Ejemplo: numero=6: los divisores del 6 son: 1+2+3=6
 funcion Ejercicio18
 	Definir num, suma, divisor Como Entero
 	
-    Escribir "Ingrese un número: "
+    Escribir "Ingrese un nÃºmero: "
     Leer num
 	
     suma = 0
@@ -532,14 +512,14 @@ funcion Ejercicio18
     FinPara
 	
     Si suma = num Entonces
-        Escribir "El número ", num, " es un número perfecto."
+        Escribir "El nÃºmero ", num, " es un nÃºmero perfecto."
     Sino
-        Escribir "El número ", num, " no es un número perfecto."
+        Escribir "El nÃºmero ", num, " no es un nÃºmero perfecto."
     FinSi
 FinFuncion
 //-------------------------------------------------------------------------------------------------------------
-//19) Dado un número N determinar si es un número primo.
-//Nota: Un número primo es aquel que solo es divisible por 1(uno) y por el mismo.
+//19) Dado un nÃºmero N determinar si es un nÃºmero primo.
+//Nota: Un nÃºmero primo es aquel que solo es divisible por 1(uno) y por el mismo.
 //Entrada divisor=1 contador=0 num=0[leer]
 //Proceso Bucle for divisor =1 hasta el numero 
 //Si numero mod divisor = 0 Contador + 1
@@ -562,22 +542,22 @@ Funcion NumeroPrimo(num)
     Leer num
     contador = SumaDivisor(num)
     Si contador = num + 1 Entonces
-        Escribir "El número ", num, " es primo."
+        Escribir "El nÃºmero ", num, " es primo."
     Sino
-        Escribir "El número ", num, " no es primo."
+        Escribir "El nÃºmero ", num, " no es primo."
     FinSi
 FinFuncion
 //-------------------------------------------------------------------------------------------------------------
-//20) Dado dos números determinar si son primos gemelos.
-//Nota: Dos números son primos gemelos si los dos son primos y su resta en valor absoluto es
+//20) Dado dos nÃºmeros determinar si son primos gemelos.
+//Nota: Dos nÃºmeros son primos gemelos si los dos son primos y su resta en valor absoluto es
 //igual a 2. Ejemplo: 7 y 5
 Funcion Ejercicio20
 Definir num1, num2 Como Entero
 
-Escribir "Ingrese el primer número: "
+Escribir "Ingrese el primer nÃºmero: "
 Leer num1
 
-Escribir "Ingrese el segundo número: "
+Escribir "Ingrese el segundo nÃºmero: "
 Leer num2
 
 Si SumaDivisor(num1) = num2 + 1 Y SumaDivisor(num2) = num1 + 1 Y Abs(num1 - num2) = 2 Entonces
@@ -589,8 +569,8 @@ FinFuncion
 
 //----------------------------------------------------------------------------------------------------------------
 
-//21) Dado dos números determinar si son primos amigos.
-//Nota: Dos números son primos amigos si las sumas de los divisores del numero1 es igual a la
+//21) Dado dos nÃºmeros determinar si son primos amigos.
+//Nota: Dos nÃºmeros son primos amigos si las sumas de los divisores del numero1 es igual a la
 //suma de los divisores del numero2. Ejemplo: 6(1+2+3=6) y 25(1+5=6)
 //Entrada num1=0[leer],num2=0[leer],,divisor=1,contador1=0,contador2=0
 //Proceso Hacemos dos blucles para cada numero para encontrar sus divisores
@@ -598,283 +578,31 @@ FinFuncion
 //Si num1 mod divisor = 0 Entonces
 //Dos numeros son amigos si sus dividores son el otro numero 
 //cerramos los bucles
-//Si contadores son iguales ç
+//Si contadores son iguales Ã§
 //Salida los numeros son amigos
 Funcion NumerosAmigos
     Definir num1, num2 Como Entero
-    Escribir "Ingresa dos números "
+    Escribir "Ingresa dos nÃºmeros "
     Leer num1, num2
 	
     Si SumaDivisor(num1) = num2 Y SumaDivisor(num2) = num1 Entonces
-        Escribir "Los números ", num1, " y ", num2, " son números amigos."
+        Escribir "Los nÃºmeros ", num1, " y ", num2, " son nÃºmeros amigos."
     Sino 
-        Escribir "Los números ingresados no son números amigos."
+        Escribir "Los nÃºmeros ingresados no son nÃºmeros amigos."
     FinSi
 FinFuncion
-//-----------------------------------------------------------------------
-//	2) La asociación de vinicultores tiene como política fijar un precio inicial al kilo
-//	de uva, la cual se clasifica en tipos A y B, y además en tamaños 1 y 2.
-//	Cuando se realiza la venta del producto, ésta es de un solo tipo y tamaño, se
-//	requiere determinar cuánto recibirá un productor por la uva que entrega en un
-//embarque, considerando lo siguiente:Si es de tipo A, se le cargan 20 al precio
-//	inicial cuando es de tamaño 1; y 30 si es de tamaño 2. Si es de tipo B, se rebajan
-//	30 cuando es de tamaño 1, y 50 cuando es de tamaño 2.
-//	Realice un algoritmo para determinar la ganancia obtenida
 
-//Entrada:	tipo=""(leer);tamaño=0(leer);precio=0.0(leer);ganacia=0.0;descuento=0.0;aumento=0.0
-//Proceso: Si tipo = "A" Entonces
-//Si tamaño = 1 Entonces
-//	aumento <- 20.0
-//Sino
-//	aumento <- 30.0
-//FinSi
-//Sino 
-//	Si tipo = "B" Entonces
-//		Si tamaño = 1 Entonces
-//			aumento <- -30.0
-//		Sino
-//			aumento <- -50.0
-//		FinSi
-//	FinSi
-//FinSi	
-//descuento = (aumento * (-1))
-//ganancia = precio + descuento
-//Salida: ganancia
 
-Funcion ganancia_uvas
-	Definir tipo Como Caracter
-	Definir tamaño Como Entero
-    Definir  ganancia, descuento, aumento Como Real
-	tipo="";tamaño=0;precio=0.0;ganacia=0.0;descuento=0.0; aumento=0.0
-	escribir "Ingrese el precio inicial"
-	Leer precio
-    Escribir "Ingrese el tipo de uva (A o B):"
-    Leer tipo
-    Escribir "Ingrese el tamaño de uva (1 o 2):"
-    Leer tamaño
-	
-	
-    Si tipo = "A" Entonces
-		Si tamaño = 1 Entonces
-            aumento <- 20.0
-        Sino
-            aumento <- 30.0
-        FinSi
-    Sino 
-		Si tipo = "B" Entonces
-			Si tamaño = 1 Entonces
-				aumento <- -30.0
-			Sino
-				aumento <- -50.0
-			FinSi
-		FinSi
-	FinSi	
-	descuento = (aumento * (-1))
-	ganancia = precio + descuento
-	
-	Escribir "La ganancia obtenida por el productor es de $", ganancia
-FinFuncion
-//--------------------------------------------------------------------------------------------------------
-//4) El consultorio del Dr. Paez tiene como política cobrar la consulta con
-//		base en el número de cita, de la siguiente forma:
-//			Las tres primeras citas a $200.00 c/u.
-//			Las siguientes dos citas a $150.00 c/u.
-//			Las tres siguientes citas a $100.00 c/u.
-//			Las restantes a $50.00 c/u, mientras dure el tratamiento.
-//			Se requiere un algoritmo para determinar:
-//						Cuánto pagará el paciente por la cita.
-//						El monto de lo que ha pagado el paciente por el tratamiento.
-//						Para la solución de este problema se requiere saber qué número de cita se efectuará, con el
-//							cual se podrá determinar el costo que tendrá la consulta y cuánto se ha gastado en el
-//							tratamiento.
-//Entrada:	cita=0(leer); precio=0.0;total=0.0 ; valor_cita=0.0
-//Proceso:
-//Si cita <= 3 Entonces
-//	precio <- 200.00
-//	Si cita > 3 y cita <= 5 Entonces
-//		precio <- 150.00
-//		total <-(cita - 3) * 150.00
-//		valor_cita <- 600.00 + total
-//		Si cita > 5 y cita <= 8 Entonces
-//			precio <- 100.00
-//			total <-(cita - 5) * 100.00
-//			valor_cita <- 1100.00 + total
-//			Si cita > 8 Entonces
-//				precio <- 50.00
-//				total <-(cita - 8) * 50.00
-//				valor_cita <- 1400.00 + total
-//			FinSi
-//		FinSi
-//	FinSi
-//FinSi
-//Salida: Escribir "Numero de cita: ",cita
-//Escribir "Costo de la consulta: ",precio
-//Escribir "Costo del tratamiento: ",valor_cita
-Funcion consulta
-	Definir precio,total,valor_cita Como Real
-	cita=0; precio=0.0;total=0.0
-	Escribir "Ingrese el numero de cita "
-	Leer cita
-	
-	Si cita <= 3 Entonces
-		precio = 200.00
-	SiNo
-		Si cita > 3 y cita <= 5 Entonces
-			precio = 150.00
-			total =(cita - 3) * 150.00
-			valor_cita = 600.00 + total
-		SiNo
-			Si cita > 5 y cita <= 8 Entonces
-				precio <- 100.00
-				total <-(cita - 5) * 100.00
-				valor_cita <- 1100.00 + total
-			SiNo
-				Si cita > 8 Entonces
-					precio <- 50.00
-					total <-(cita - 8) * 50.00
-					valor_cita <- 1400.00 + total
-				FinSi
-			FinSi
-		FinSi
-	FinSi
-	
-	Escribir "Numero de cita: ",cita
-	Escribir "Costo de la consulta: ",precio
-	Escribir "Costo del tratamiento: ",valor_cita
-FinFuncion
 //----------------------------------------------------------------------------------------------------
-//6) El banco XYZ ha decidido aumentar el límite de crédito de las tarjetas de crédito
-//de sus clientes, para esto considera que:
-//Si su cliente tiene tarjeta tipo 1, el aumento será del 25%.
-//Si tiene tipo 2 el aumento será del 35%
-//Si tiene tipo 3, el aumento será del 40%
-//Para cualquier otro tipo será del 50%
-//Se pide realizar un algoritmo que ayude al banco a determinar el nuevo límite
-//de crédito que tendrá una persona en su tarjeta considerando que después
-//del aumento de porcentaje se tendrá que subir $20 adicionales a todas las tarjetas
-//Entrada:
-//Proceso:Segun tipo Hacer
-//1:
-//	aumento <- ( saldo * 25)/100
-//2:
-//	aumento <- ( saldo * 35)/100
-//3:
-//	aumento <- ( saldo * 40)/100
-//De Otro Modo:
-//	aumento <- ( saldo * 50)/100
-//Fin Segun
-//nuevo_salario <- aumento + saldo
-//Salida: nuevo_salario
 
-//------------------------------------------------------------------------------------------------------
-//10) La asociación de vinicultores tiene como política fijar un precio inicial al quintal de
-//pitajaya, la cual se clasifica en tipos "Amarilla" y "Colorada", y además en tamaños 1 y 2.
-//Cuando se realiza la venta del producto, ésta es de un solo tipo y tamaño, se requiere
-//determinar cuánto recibirá un productor por la pitajaya que entrega en un embarque,
-//considerando lo siguiente:
-//? Si es de tipo Amarilla, se le cargan $10 al precio inicial cuando es de tamaño 1; y 15% mas $5
-//si es de tamaño 2
-//? Si es de tipo Colorada, se rebajan $20 cuando es de tamaño 1, y 20% cuando es de tamaño
-//2. Sea tipo Amarilla y Colorada se debe se aplicar un descuento del 5% y el 12% del IVA.
-//Realice un algoritmo para determinar el precio de embarque
-funcion pitajaya_precio
-	Definir tipo Como Caracter
-    Definir tamaño Como Entero
-    Definir precioInicial, descuento, precioFinal Como Real
-    Definir iva Como Real
-    Definir porcentajeAmarilla1, porcentajeAmarilla2, descuentoColorada1, descuentoColorada2 Como Real
-    
-    porcentajeAmarilla1 = 0.1
-    porcentajeAmarilla2 = 0.15
-    descuentoColorada1 = 0.2
-    descuentoColorada2 = 0.2
-    
-    Escribir "Ingrese el tipo de pitajaya (Amarilla o Colorada):"
-    Leer tipo
-    Escribir "Ingrese el tamaño de pitajaya (1 o 2):"
-    Leer tamaño
-    Escribir "Ingrese el precio inicial:"
-    Leer precioInicial
-    
-    Si tipo = "Amarilla" Entonces
-        Si tamaño = 1 Entonces
-            precioFinal = precioInicial + porcentajeAmarilla1
-        Sino
-            precioFinal = precioInicial + (precioInicial * porcentajeAmarilla2) + 5
-        FinSi
-    Sino
-        Si tamaño = 1 Entonces
-            precioFinal = precioInicial - descuentoColorada1
-        Sino
-            precioFinal = precioInicial - (precioInicial * descuentoColorada2 )
-        FinSi
-    FinSi
-    
-    descuento = precioFinal * 0.05
-    iva = precioFinal * 0.12
-    
-    precioFinal = precioFinal - descuento + iva
-    
-    Escribir "El precio final del embarque es:", precioFinal
-	
-FinFuncion
-//----------------------------------------------------------------------------------------------------
-//12) Fábricas "El cometa" produce artículos con claves (1, 2, 3, 4, 5 y 6). Se requiere un
-//algoritmo para calcular los precios de venta, para esto hay que considerar lo siguiente:
-//Costo de producción = materia prima + mano de obra + gastos de fabricación.
-//Precio de venta = costo de producción + 45 % de costo de producción.
-//El costo de la mano de obra se obtiene de la siguiente forma: para los productos con clave 3 o
-//4 se carga 75 % del costo de la materia prima; para los que tienen clave 1 o 5 se carga 80 %, y
-//para los que tienen clave 2 o 6, 85 %.
-//Para calcular el gasto de fabricación se considera que, si el artículo que se va a producir tiene
-//claves 2 o 5, este gasto representa 30 % sobre el costo de la materia prima; si las claves son 3 o
-//6, representa 35 %; si las claves son 1 o 4, representa 28 %. La materia prima tiene el mismo
-//costo para cualquier clave.
-funcion materia_prima
-	Definir clave Como Entero
-	Definir CostoMateriaPrima Como Real
-	Escribir "Ingrese el costo de la materia prima"
-	Leer costoMateriaPrima
-	Escribir "Ingrese la clave"
-	Leer clave
-	Si clave = 3 o clave = 4 Entonces
-		costoManoObra = 0.75 * costoMateriaPrima
-	Sino
-		Si clave = 1 o clave = 5 Entonces
-			costoManoObra = 0.80 * costoMateriaPrima
-		Sino
-			costoManoObra = 0.85 * costoMateriaPrima
-		FinSi
-	FinSi
-	
-	// Calcular el costo de los gastos de fabricación
-	Si clave = 2 o clave = 5 Entonces
-		costoGastosFabricacion = 0.30 * costoMateriaPrima
-	Sino
-		Si clave = 3 o clave = 6 Entonces
-			costoGastosFabricacion = 0.35 * costoMateriaPrima
-		Sino
-			costoGastosFabricacion = 0.28 * costoMateriaPrima
-		FinSi
-	FinSi
-	
-	// Calcular el costo de producción
-	costoProduccion = costoMateriaPrima + costoManoObra + costoGastosFabricacion
-	
-	// Calcular el precio de venta
-	precioVenta = costoProduccion + 0.45 * costoProduccion
-	
-	Escribir "El precio de venta del artículo es:", precioVenta
-FinFuncion
-//---------------------------------------------------------------------------------------------------------
-//14) Dado un número, determine si es capicúa.
-//Nota: un número capicúa es aquel que se lee igual hacia adelante que hacia atrás.
+//14) Dado un nÃºmero, determine si es capicÃºa.
+//Nota: un nÃºmero capicÃºa es aquel que se lee igual hacia adelante que hacia atrÃ¡s.
 funcion capicua(num)
 	
 	Si num MOD 11 = 0 Entonces
-		Escribir num, " es capicúa" 
+		Escribir num, " es capicÃºa" 
 	SiNo 
-		Escribir num, " no es capicúa" 
+		Escribir num, " no es capicÃºa" 
 		
 	FinSi
 FinFuncion
@@ -883,7 +611,7 @@ FinFuncion
 funcion suma=divisores
 	Definir  suma, divisor Como Entero
 	
-	Escribir "Ingrese un número: "
+	Escribir "Ingrese un nÃºmero: "
 	Leer num
 	
 	suma = 0
@@ -897,9 +625,9 @@ funcion suma=divisores
 	
 FinFuncion
 //------------------------------------------------------------------------------------------------------------
-//18) Escribir un algoritmo que indique si un número es perfecto
-//Nota: un número es perfecto cuando la suma de los divisores del número incluido el 1 y
-//excluido el propio número es igual al numero
+//18) Escribir un algoritmo que indique si un nÃºmero es perfecto
+//Nota: un nÃºmero es perfecto cuando la suma de los divisores del nÃºmero incluido el 1 y
+//excluido el propio nÃºmero es igual al numero
 //Ejemplo: numero=6: los divisores del 6 son: 1+2+3=6
 funcion perfecto(num)
 	Definir  suma, divisor Como Entero
@@ -913,22 +641,22 @@ funcion perfecto(num)
     FinPara
 	
     Si suma = num Entonces
-        Escribir "El número ", num, " es un número perfecto."
+        Escribir "El nÃºmero ", num, " es un nÃºmero perfecto."
     Sino
-        Escribir "El número ", num, " no es un número perfecto."
+        Escribir "El nÃºmero ", num, " no es un nÃºmero perfecto."
     FinSi
 FinFuncion
 //-------------------------------------------------------------------------------------------------------------
-//20) Dado dos números determinar si son primos gemelos.
-//Nota: Dos números son primos gemelos si los dos son primos y su resta en valor absoluto es
+//20) Dado dos nÃºmeros determinar si son primos gemelos.
+//Nota: Dos nÃºmeros son primos gemelos si los dos son primos y su resta en valor absoluto es
 //igual a 2. Ejemplo: 7 y 5
 funcion primos_gemelos
 	Definir num1, num2, i, j, esPrimo1, esPrimo2 Como Entero
 	
-    Escribir "Ingrese el primer número: "
+    Escribir "Ingrese el primer nÃºmero: "
     Leer num1
 	
-    Escribir "Ingrese el segundo número: "
+    Escribir "Ingrese el segundo nÃºmero: "
     Leer num2
 	
     esPrimo1 = 1
@@ -959,7 +687,7 @@ FinFuncion
 
 //Operaciones con cadenas y arreglos
 //2) Implementa un programa que calcule el promedio de los elementos pares e impares en un
-//arreglo de números enteros y los copie en otro arreglo.
+//arreglo de nÃºmeros enteros y los copie en otro arreglo.
 //Ejemplo:
 //arreglo[2,3,4,7] areglo2[3,5]
 funcion pares_impares
@@ -971,14 +699,14 @@ funcion pares_impares
 	
     // Leer valores para el arreglo
     Para contador =0 Hasta 3 Hacer
-        Escribir "Ingrese un número: "
+        Escribir "Ingrese un nÃºmero: "
         Leer arreglo[contador]
     FinPara
 	
     contadorPares = 0
     contadorImpares = 0
 	
-    // Separar números pares e impares y calcular los promedios
+    // Separar nÃºmeros pares e impares y calcular los promedios
     Para contador = 0 Hasta 3 Hacer
         Si arreglo[contador] MOD 2 = 0 Entonces
             contadorPares <- contadorPares + 1
@@ -989,14 +717,14 @@ funcion pares_impares
         FinSi
     FinPara
 	
-    // Calcular el promedio de los números pares
+    // Calcular el promedio de los nÃºmeros pares
     promedioPares = 0
     Para contador = 1 Hasta contadorPares Hacer
         promedioPares = promedioPares + arregloPares[contador]
     FinPara
     promedioPares <- promedioPares / contadorPares
 	
-    // Calcular el promedio de los números impares
+    // Calcular el promedio de los nÃºmeros impares
     promedioImpares = 0
     Para contador <- 1 Hasta contadorImpares Hacer
         promedioImpares = promedioImpares + arregloImpares[contador]
@@ -1008,13 +736,13 @@ funcion pares_impares
     Para contador =0  Hasta 3 Hacer
         Escribir arreglo[contador]
     FinPara
-    Escribir "Promedio de números pares: ", promedioPares
-    Escribir "Promedio de números impares: ", promedioImpares
+    Escribir "Promedio de nÃºmeros pares: ", promedioPares
+    Escribir "Promedio de nÃºmeros impares: ", promedioImpares
 	
 FinFuncion
 //---------------------------------------------------------------------------------------------------------
-//4) Implementa un programa que copie los números de un arreglo a 2 arreglos en uno los
-//números positivos y en el otro los negativos Ejemplo:
+//4) Implementa un programa que copie los nÃºmeros de un arreglo a 2 arreglos en uno los
+//nÃºmeros positivos y en el otro los negativos Ejemplo:
 //arreglo=[2,-6,4,-9, 12] arregloPositivo=[2,4,12] arregloNegativo[-6,-9]
 funcion positivos_negativos
 	Dimension arreglo[6]
@@ -1023,14 +751,14 @@ funcion positivos_negativos
     Definir contador, contadorPositivo, contadorNegativo Como Entero
 	
     Para contador <- 0 Hasta 4 Hacer
-        Escribir "Ingrese un número: "
+        Escribir "Ingrese un nÃºmero: "
         Leer arreglo[contador]
     FinPara
 	
     contadorPositivo <- 0
     contadorNegativo <- 0
 	
-    // Separar números positivos y negativos
+    // Separar nÃºmeros positivos y negativos
     Para contador = 0 Hasta 4 Hacer
         Si arreglo[contador] > 0 Entonces
             contadorPositivo = contadorPositivo + 1
@@ -1046,18 +774,18 @@ funcion positivos_negativos
     Para contador =0  Hasta 4 Hacer
         Escribir arreglo[contador]
     FinPara
-    Escribir "Arreglo de números positivos: "
+    Escribir "Arreglo de nÃºmeros positivos: "
     Para contador = 1 Hasta contadorPositivo Hacer
         Escribir arregloPositivo[contador]
     FinPara
-    Escribir "Arreglo de números negativos: "
+    Escribir "Arreglo de nÃºmeros negativos: "
     Para contador = 1 Hasta contadorNegativo Hacer
         Escribir arregloNegativo[contador]
     FinPara
 FinFuncion
 
 //-------------------------------------------------------------------------------------------------------------------
-//6) Leer una secuencia de números hasta que se ingrese un 0
+//6) Leer una secuencia de nÃºmeros hasta que se ingrese un 0
 //y almacenarlos en un arreglo
 //Se pide recorrer el arreglo y mostrar la suma del cuadrado de cada numero.
 //Ejemplo: secuencia: 4,3,2,5,0
@@ -1071,7 +799,7 @@ funcion cuadrado
 	sumaCuadrados = 0
     
     i = 0
-	Escribir "Ingrese una secuencia de números (0 para terminar):"
+	Escribir "Ingrese una secuencia de nÃºmeros (0 para terminar):"
     Leer num
 	secuencia_cuadrado[i] = num
 	
@@ -1087,9 +815,9 @@ funcion cuadrado
 FinFuncion
 //-----------
 //---------------------------------------------------------------------------------------------------------------------------
-//8) Leer una secuencia de números hasta que se ingrese un numero negativo
+//8) Leer una secuencia de nÃºmeros hasta que se ingrese un numero negativo
 //y almacenarlos en un arreglo
-//Se pide recorrer el arreglo y mostrar la suma de cada número elevado al cubo.
+//Se pide recorrer el arreglo y mostrar la suma de cada nÃºmero elevado al cubo.
 //Ejemplo: secuencia: 4,3,2,5,-1
 //arreglo=[4,3,2,5]
 //exponentes= 64 27 8 125
@@ -1100,7 +828,7 @@ funcion cubo
     Definir i Como Entero
 	sumaCubos = 0
     i = 0
-	Escribir "Ingrese una secuencia de números (0 para terminar):"
+	Escribir "Ingrese una secuencia de nÃºmeros (0 para terminar):"
     Leer num
 	secuencia_cubo[i] = num
 	
@@ -1116,9 +844,9 @@ funcion cubo
 FinFuncion
 
 //----------------------------------------------------------------------------------------------------------------------------------
-//12) Leer una secuencia de números hasta que se ingrese un 0
+//12) Leer una secuencia de nÃºmeros hasta que se ingrese un 0
 //y almacenarlos en arreglo. Se pide recorrer el arreglo y pasar a otro
-//arreglo solo los números pares de cada elemento del arreglo1
+//arreglo solo los nÃºmeros pares de cada elemento del arreglo1
 //Ejemplo: secuencia: 4,3,6,9,0
 //		arreglo1=[4,3,6,9] arreglo2= [4,6]
 funcion pares(num)
@@ -1129,15 +857,15 @@ funcion pares(num)
     i = 0
     j = 0
     
-    // Leer números hasta que se ingrese un 0
-    Escribir "Ingrese una secuencia de números (0 para terminar):"
+    // Leer nÃºmeros hasta que se ingrese un 0
+    Escribir "Ingrese una secuencia de nÃºmeros (0 para terminar):"
     Leer num
     
     Mientras numero <> 0 Hacer
-        // Agregar el número al arreglo1
+        // Agregar el nÃºmero al arreglo1
         arreglo1[i] = num
         
-        // Si el número es par, agrégalo al arreglo2
+        // Si el nÃºmero es par, agrÃ©galo al arreglo2
         Si numero % 2 = 0 Entonces
             arreglo2[j] = numero
             j = j + 1
@@ -1145,7 +873,7 @@ funcion pares(num)
         
         i = i + 1
         
-        // Leer el próximo número
+        // Leer el prÃ³ximo nÃºmero
         Leer numero
     FinMientras
     
@@ -1154,7 +882,7 @@ funcion pares(num)
         Escribir arreglo1[i]
     FinPara
     
-    Escribir "Arreglo2 (números pares de arreglo1):"
+    Escribir "Arreglo2 (nÃºmeros pares de arreglo1):"
     Para i = 0 Hasta j - 1 Hacer
         Escribir arreglo2[i]
     FinPara
@@ -1163,9 +891,9 @@ FinFuncion
 //----------------------------------------------------------------------------------------------------
 //		14) Elaborar un algoritmo que lea una serie de edades de los alumnos de la facultad FACI y
 //		los guarde en un arreglo. Se pide:
-//			· calcular el promedio general de las edades de los alumnos
-//			· La cantidad y el promedio de las edades mayores o iguales a 18
-//			· La cantidad y el promedio de las edades menores a 18
+//			Â· calcular el promedio general de las edades de los alumnos
+//			Â· La cantidad y el promedio de las edades mayores o iguales a 18
+//			Â· La cantidad y el promedio de las edades menores a 18
 //		Ejemplo:
 //			Edades=[20,17,20,23]
 //			promedioGeneral=20
@@ -1225,8 +953,8 @@ FinFuncion
 //----------------------------------------------------------------------------------------------------
 //			16) Elaborar un algoritmo que lea una serie de sueldos de los empleados de la unemi y los
 //			guarde en un arreglo. Se pide:
-//				· Presentar el sueldo más alto de los empleados
-//				· La cantidad y el promedio de os sueldos de los empleados
+//				Â· Presentar el sueldo mÃ¡s alto de los empleados
+//				Â· La cantidad y el promedio de os sueldos de los empleados
 //			Ejemplo:
 //				sueldos=[500,700,800,600]
 //				SueldoMasAlto= 800
@@ -1251,13 +979,13 @@ funcion sueldos_empleados
             sumaSueldos = sumaSueldos + sueldo
             cantidadSueldos = cantidadSueldos + 1
         Sino
-            Escribir "Sueldo inválido. Ingrese un sueldo válido."
+            Escribir "Sueldo invÃ¡lido. Ingrese un sueldo vÃ¡lido."
         FinSi
         
         Leer sueldo
     FinMientras
     
-    // Buscar el sueldo más alto
+    // Buscar el sueldo mÃ¡s alto
     Para i = 0 Hasta cantidadSueldos - 1 Hacer
         Si sueldos[i] > sueldoMasAlto Entonces
             sueldoMasAlto = sueldos[i]
@@ -1269,11 +997,11 @@ funcion sueldos_empleados
     
     // Mostrar resultados
     Si cantidadSueldos > 0 Entonces
-        Escribir "Sueldo más alto: ", sueldoMasAlto
+        Escribir "Sueldo mÃ¡s alto: ", sueldoMasAlto
         Escribir "Cantidad de sueldos: ", cantidadSueldos
         Escribir "Promedio de sueldos: ", promedioSueldos
     Sino
-        Escribir "No se ingresaron sueldos válidos."
+        Escribir "No se ingresaron sueldos vÃ¡lidos."
     FinSi
 FinFuncion
 
@@ -1318,11 +1046,11 @@ Funcion contador=ContarPalabras
             enPalabra = Falso
         FinSi
     FinPara
-	
+	Escribir "La palabra tiene: ",contador," palabras"
 FinFuncion
 
 //----------------------------------------------------------------------------------------------------
-//22) Indicar si una palabra es palíndroma". Ejemplo: "ana" es palíndroma por se lee igual de
+//22) Indicar si una palabra es palÃ­ndroma". Ejemplo: "ana" es palÃ­ndroma por se lee igual de
 //inicio a fin que de fin a inicio
 
 Funcion InvertirPalabra
@@ -1335,9 +1063,9 @@ Funcion InvertirPalabra
 		cad2 <- Concatenar(cad2,Subcadena(cad1,posicion,posicion));
 	FinPara
 	Si cad1=cad2 Entonces
-		Escribir "Es un palíndromo";
+		Escribir "Es un palÃ­ndromo";
 	SiNo
-		Escribir "No es un palíndromo";
+		Escribir "No es un palÃ­ndromo";
 	FinSi
 FinFuncion
 
@@ -1402,28 +1130,54 @@ Funcion SecuenciaDeNumeros
 	Escribir "La cantidad de numeros multiplos de 3 es: ",contador2
 FinFuncion
 //--------------------------------------------------------------------------
+//7) Leer una secuencia de nÃºmeros hasta que se ingrese un numero par.
+//Mostrar la cantidad de los nÃºmeros mayores a 5 y la suma de los mÃºltiplos de 5
+//Ejemplo:
+//secuencia: 3,5,15,7,9, 4
+//Respuesta
+//contMay5=3
+//sumaMultiplos5=20
 //Entrada contador=0 = num=0[leer]
 //Proceso bucle contamos los numeros divisibles para 5
 //Contamos numeros mayores que 5 del arreglo
 //Salida contador1 contador2
-Funcion SecuenciaDeNumeros2
-	Definir contador,num Como Entero
-	contador = 0
-	num=0
-	Mientras num mod 2 <> 0 Hacer
-		Escribir "Ingresa un numero"
-		Leer num
-		Si num > 5 Entonces
-			contador1 <- contador1 + 1
-		SiNo
-			Si num mod 5 = 0 Entonces
-				contador2 <- contador2 + num 
-			FinSi
-		FinSi
-	FinMientras
-	Escribir "Numeros mayores a 5 es:",contador1
-	Escribir "La suma de los numeros multiplos de 5 es: ",contador2
+//------------------------------------------------------------------------------------------------------
+Funcion Secuencia5
+	Dimension secuenciaPares[7]
+	Definir contMay5, sumaMultiplos5 Como Entero
+    Definir numero, indice Como Entero
+	
+    contMay5 <- 0
+    sumaMultiplos5 <- 0
+    indice <- 1
+	
+    Escribir "Ingrese una secuencia de nÃºmeros. Para detenerse, ingrese un nÃºmero par."
+	Leer numero
+    Mientras numero MOD 2 <> 0  Hacer
+        Escribir "Ingrese un nÃºmero: "
+        Leer numero
+		
+        Si numero > 5 Entonces
+            contMay5 <- contMay5 + 1
+        FinSi
+		
+        Si numero MOD 5 = 0 Entonces
+            sumaMultiplos5 <- sumaMultiplos5 + numero
+        FinSi
+		
+        secuenciaPares[indice] <- numero
+        indice = indice + 1
+    FinMientras
+	
+    Escribir "Secuencia ingresada:"
+    Para indice <- 0 Hasta indice - 1 Hacer
+        Escribir secuenciaPares[indice]
+    FinPara
+	
+    Escribir "Cantidad de nÃºmeros mayores a 5: ", contMay5
+    Escribir "Suma de mÃºltiplos de 5: ", sumaMultiplos5
 FinFuncion
+
 //--------------------------------------------------------------------------
 funcion contadorPalabras
 	Dimension frases[50]
@@ -1477,7 +1231,7 @@ Funcion contador=ContadorDeX(frase)
 			contador= contador + 1
 		FinSi
 	FinPara
-	Escribir "Existen ",contador," ´x´ en la frase"
+	Escribir "Existen ",contador," Â´xÂ´ en la frase"
 FinFuncion
 //--------------------------------------------------------------------------
 //Entrada num1=0[leer] num2=[leer] pos=0
@@ -1544,11 +1298,9 @@ FinFuncion
 //Segun vocal de la subcadena(frase,pos,pos)
 //Conv +1     Segun subcadena(frase,pos,pos) conc +1
 //Salida muestro conc conv 
-Funcion ContadorVocyCons
+Funcion cont=ContadorFrase(frase)
 	Definir conv,conc,long Como Entero
-	Definir frase Como Caracter
-	Escribir "Ingrese una frase: "
-	Leer frase
+	
 	long=Longitud(frase)
 	Para pos=0 Hasta long-1 Con Paso 1 Hacer
 		Segun Subcadena(frase,pos,pos) Hacer
@@ -1558,8 +1310,8 @@ Funcion ContadorVocyCons
 				conc=conc+1
 		FinSegun
 	FinPara
-	Escribir "El nunero de vocales de la frase es: ",conv
-	Escribir "El nunero de consonantes de la frase es: ",conc
+	Escribir "El nÃºmero de vocales de la frase es: ",conv
+	Escribir "El nÃºmero de consonantes de la frase es: ",conc
 	Escribir "La frase tiene ",long," caracteres"
 FinFuncion
 //--------------------------------------------------------------------------
@@ -1569,14 +1321,14 @@ FinFuncion
 //Blucle para ingresar los digitos 
 //sumo digito por digito ingresado
 //Salida suma
-Funcion SumaDeNumCedula
+Funcion suma=SumaDeNumCedula
 	Definir suma,digito,x Como Entero
 	Para x=0 Hasta 9 Con Paso 1 Hacer
 		Escribir "Ingresa tu numero de cedula digito por digito"
 		Leer digito
 		suma=suma+digito
 	FinPara
-	Escribir "La suma de los numeros es: ",suma
+	Escribir "La suma de los dÃ­gitos es: ",suma
 FinFuncion
 
 //--------------------------------------------------------------------------
@@ -1614,7 +1366,7 @@ Funcion opcion=presentarMenu(titulo,menu,lim)
 	Para pos=0 Hasta lim-1 Con Paso 1 Hacer
 		Escribir menu[pos]
 	Fin Para
-	Escribir "Elija opción[1..",lim,"]" Sin Saltar
+	Escribir "Elija opciÃ³n[1..",lim,"]" Sin Saltar
 	leer opcion
 FinFuncion
 
@@ -1630,25 +1382,25 @@ Algoritmo Proyecto
 		menuPrincipal[2] = "  3)Salir"
 	
 	// arreglo submenu numeros
-	menuNumeros[0] = "  1)Determinar cuánto se debe pagar por cierta cantidad de colas"
+	menuNumeros[0] = "  1)Determinar cuÃ¡nto se debe pagar por cierta cantidad de colas"
 	menuNumeros[1] = "  2)Precio inicial al kilo de uva"
-	menuNumeros[2] = "  3)Reciduo de dos números"
-	menuNumeros[3] = "  4)Política cobrar la consulta con base en el número de cita"
+	menuNumeros[2] = "  3)Reciduo de dos nÃºmeros"
+	menuNumeros[3] = "  4)PolÃ­tica cobrar la consulta con base en el nÃºmero de cita"
 	menuNumeros[4] = "  5)Algoritmo que determine si un numero es la mitad y si un numero es divisor de otro"
-	menuNumeros[5] = "  6)Banco XYZ aumento del límite de crédito de las tarjetas de crédito"
+	menuNumeros[5] = "  6)Banco XYZ aumento del lÃ­mite de crÃ©dito de las tarjetas de crÃ©dito"
 	menuNumeros[6] = "  7)Algoritmo que determine si un numero es divisor del otro y uno es el doble del otro"
-	menuNumeros[7] = "  8)Banco Poo aumento del límite de crédito de las tarjetas de crédito"
+	menuNumeros[7] = "  8)Banco Poo aumento del lÃ­mite de crÃ©dito de las tarjetas de crÃ©dito"
 	menuNumeros[8] = "  9)Mostrar si un numero es negativo menor que -20"
 	menuNumeros[9] = "  10)precio inicial al quintal de pitajaya"
 	menuNumeros[10]= "  11)Mostrar si un numero es menor que 10"
 	menuNumeros[11] = "  12)Calcular los precios de venta Fabrica de Cometas"
-	menuNumeros[12] = "  13)Calcular cuántos dígitos tiene una cifra"
-	menuNumeros[13] = "  14)Determine si un numero es capicúa"
+	menuNumeros[12] = "  13)Calcular cuÃ¡ntos dÃ­gitos tiene una cifra"
+	menuNumeros[13] = "  14)Determine si un numero es capicÃºa"
 	menuNumeros[14] = "  15)Algoritmo que presente los divisores de un numero"
 	menuNumeros[15] = "  16)Algoritmo que presente la suma de los divisores de un numero"
 	menuNumeros[16] = "  17)Algoritmo que presente la cantidad de los divisores de un numero"
-	menuNumeros[17] = "  18)Algoritmo que indique si un número es perfecto"
-	menuNumeros[18] = "  19)Determinar si es un número primo"
+	menuNumeros[17] = "  18)Algoritmo que indique si un nÃºmero es perfecto"
+	menuNumeros[18] = "  19)Determinar si es un nÃºmero primo"
 	menuNumeros[19]= "  20)Determinar si dos numeros son primos gemelos"
 	menuNumeros[20]= "  21)Determinar si dos numeros son amigos"
 	menuNumeros[21]= "  22)Salir"
@@ -1658,25 +1410,25 @@ Algoritmo Proyecto
 	menuCadenasYArreglos[1]= "2)Calcular el promedio de los elementos pares e impares de un arreglo"
 	menuCadenasYArreglos[2]= "3)Algoritmo que presente una secuencia"
 	menuCadenasYArreglos[3]= "4)Separador de numeros positivos y negativos"
-	menuCadenasYArreglos[4]= "5)La suma de los pares y la cantidad de los números que son múltiplo de 3 de un arreglo"
+	menuCadenasYArreglos[4]= "5)La suma de los pares y la cantidad de los nÃºmeros que son mÃºltiplo de 3 de un arreglo"
 	menuCadenasYArreglos[5]= "6)Mostrar la suma del cuadrado de cada numero de un arreglo."
-	menuCadenasYArreglos[6]= "7)Mostrar la cantidad de los números mayores a 5 y la suma de los múltiplos de 5"
-	menuCadenasYArreglos[7]= "8)Mostrar la suma de cada número elevado al cubo de un arreglo"
+	menuCadenasYArreglos[6]= "7)Mostrar la cantidad de los nÃºmeros mayores a 5 y la suma de los mÃºltiplos de 5"
+	menuCadenasYArreglos[7]= "8)Mostrar la suma de cada nÃºmero elevado al cubo de un arreglo"
 	menuCadenasYArreglos[8]= "9)Dado una frase indicar cuantas palabras tiene"
 	menuCadenasYArreglos[9]= "10)Cambiar cada elemento de un arreglo por su doble"
-	menuCadenasYArreglos[10]="11)Mostrar cuantos ´x´ se ingresaron en un arreglo"
-	menuCadenasYArreglos[11]= "12)Pasar a otro un arreglo a otro solo los números pares de cada elemento"
+	menuCadenasYArreglos[10]="11)Mostrar cuantos Â´xÂ´ se ingresaron en un arreglo"
+	menuCadenasYArreglos[11]= "12)Pasar a otro un arreglo a otro solo los nÃºmeros pares de cada elemento"
 	menuCadenasYArreglos[12]= "13)Presentar los valores mayores a 5 entre ellos incluidos el numero inicial y final"
 	menuCadenasYArreglos[13]= "14)Calcular el promedio general de las edades de los alumnos"
 	menuCadenasYArreglos[14]= "15)Presentar los valores impares comprendidos entre dos numeros"
-	menuCadenasYArreglos[15]= "16)Presentar el sueldo más alto de los empleados"
+	menuCadenasYArreglos[15]= "16)Presentar el sueldo mÃ¡s alto de los empleados"
 	menuCadenasYArreglos[16]= "17)Dadas dos frase indicar la de mayor longitud"
 	menuCadenasYArreglos[17]= "18)Indicar cuantas ,.;: hay en una cadena"
-	menuCadenasYArreglos[18]= "19)Dado una cadena indicar cuantas vocales, consonantes y dígitos hay"
+	menuCadenasYArreglos[18]= "19)Dado una cadena indicar cuantas vocales, consonantes y dÃ­gitos hay"
 	menuCadenasYArreglos[19]= "20)Indicar cuantas palabras hay en una frase asumiendo 1 o varios espacios entre palabras"
-	menuCadenasYArreglos[20]="21)  Presentar la suma de los dígitos de una cedula"
-	menuCadenasYArreglos[21]="22) Indicar si una palabra es palíndroma"
-	menuCadenasYArreglos[22]="23) Presentar la posición de un carácter cualquiera dentro de una cadena"
+	menuCadenasYArreglos[20]="21)  Presentar la suma de los dÃ­gitos de una cedula"
+	menuCadenasYArreglos[21]="22) Indicar si una palabra es palÃ­ndroma"
+	menuCadenasYArreglos[22]="23) Presentar la posiciÃ³n de un carÃ¡cter cualquiera dentro de una cadena"
 	menuCadenasYArreglos[23]="24) Salir"
 	//--------------------------------
 	
@@ -1691,39 +1443,39 @@ Algoritmo Proyecto
 					opcn=presentarMenu("Menu Numeros",menuNumeros,22)
 					Segun opcn Hacer
 						"1":
-							Escribir "1)Determinar cuánto se debe pagar por cierta cantidad de colas"
+							Escribir "1)Determinar cuÃ¡nto se debe pagar por cierta cantidad de colas"
 							pagar=CalculaPrecioColas(25)
 							Esperar 6 Segundos
 						"2":
 							Escribir "2)Precio inicial al kilo de uva"
-							ganancia_uvas
+							Ejercicio2(140,"A",1)
 							Esperar  6 Segundos
 						"3":
-							Escribir "3)Reciduo de dos números"
+							Escribir "3)Reciduo de dos nÃºmeros"
 							reciduo=CalcularReciduo(10,5)
 							Esperar  6 Segundos
 						"4":
-							Escribir "4)Política cobrar la consulta con base en el número de cita"
+							Escribir "4)PolÃ­tica cobrar la consulta con base en el nÃºmero de cita"
 							consulta
 							Esperar 6 Segundos
 						"5":
 							Escribir "5)Algoritmo que determine si un numero es la mitad y si un numero es divisor de otro"
-							ComparacionDeNum(10,5,6,3)
+							Comparacion1(10,5,6,3)
 							Esperar 6 Segundos
 						"6":
-							Escribir "6)Banco XYZ aumento del límite de crédito de las tarjetas de crédito"
+							Escribir "6)Banco XYZ aumento del lÃ­mite de crÃ©dito de las tarjetas de crÃ©dito"
 							nuevo_limite=Ejercicio6
-							Escribir "El nuevo límite de crédito es: ",nuevo_limite
+							Escribir "El nuevo lÃ­mite de crÃ©dito es: ", nuevo_limite
 							//----------------------------------------
 							Esperar 6 Segundos
 						"7":
 							Escribir "7)Algoritmo que determine si un numero es divisor del otro y uno es el doble del otro"
-							CompararUnNumero()
+							Comparacion2(2,3,4,5)
 							Esperar 6 Segundos
 						"8":
-							Escribir "8)Banco Poo aumento del límite de crédito de las tarjetas de crédito"
-							nuevo_limite=Ejercicio8
-							Escribir "El nuevo límite de crédito es: ", nuevo_limite
+							Escribir "8)Banco Poo aumento del lÃ­mite de crÃ©dito de las tarjetas de crÃ©dito"
+							nuevo_limite=Ejercicio6
+							Escribir "El nuevo lÃ­mite de crÃ©dito es: ", nuevo_limite
 							Esperar 6 Segundos
 						"9":
 							Escribir "9)Mostrar si un numero es negativo menor que -20"
@@ -1731,7 +1483,7 @@ Algoritmo Proyecto
 							Esperar 6 Segundos
 						"10":
 							Escribir "10)precio inicial al quintal de pitajaya"
-							pitajaya_precio
+							Ejercicio2(140,"Amarilla",1)
 							Esperar 6 Segundos
 						"11":
 							Escribir "11)Mostrar si un numero es menor que 10"
@@ -1742,11 +1494,11 @@ Algoritmo Proyecto
 							materia_prima
 							Esperar 6 Segundos
 						"13":
-							Escribir "13)Calcular cuántos dígitos tiene una cifra"
+							Escribir "13)Calcular cuÃ¡ntos dÃ­gitos tiene una cifra"
 							contador=CantidadDeDigitos(1555)
 							Esperar 6 Segundos
 						"14":
-							Escribir "14)Determine si un numero es capicúa"
+							Escribir "14)Determine si un numero es capicÃºa"
 							capicua(11)
 							Esperar 6 Segundos
 						"15":
@@ -1762,11 +1514,11 @@ Algoritmo Proyecto
 							SumaDivisores(9)						
 							Esperar 6 Segundos
 						"18":
-							Escribir "18)Algoritmo que indique si un número es perfecto"
+							Escribir "18)Algoritmo que indique si un nÃºmero es perfecto"
 							perfecto(6)
 							Esperar 6 Segundos
 						"19":
-							Escribir "19)Determinar si es un número primo"
+							Escribir "19)Determinar si es un nÃºmero primo"
 							NumeroPrimo(6)
 							Esperar 6 Segundos
 						"20":
@@ -1809,7 +1561,7 @@ Algoritmo Proyecto
 							pares_impares
 							Esperar 6 Segundos
 						"5":
-							Escribir "Secuencia de números"
+							Escribir "Secuencia de nÃºmeros"
 							SecuenciaDeNumeros
 							Esperar 6 Segundos
 						"6":
@@ -1817,8 +1569,8 @@ Algoritmo Proyecto
 							cuadrado
 							Esperar 6 Segundos
 						"7":
-							Escribir "Secuencia de números #2"
-							SecuenciaDeNumeros2
+							Escribir "Secuencia de nÃºmeros #2"
+							Secuencia5
 							Esperar 6 Segundos
 						"8":
 							Escribir "Suma de cubos"
@@ -1838,7 +1590,7 @@ Algoritmo Proyecto
 							contador=ContadorDeX(frase)
 							Esperar 6 Segundos
 						"12":
-							Escribir "Números pares"
+							Escribir "NÃºmeros pares"
 							pares(num)
 							Esperar 6 Segundos
 						"13":
@@ -1869,7 +1621,7 @@ Algoritmo Proyecto
 							Esperar 6 Segundos
 						"19":
 							Escribir ""
-							ContadorVocyCons
+							cont=ContadorFrase("hola amigo")
 							Esperar 6 Segundos
 						"20":
 							Escribir ""
@@ -1878,14 +1630,15 @@ Algoritmo Proyecto
 							Esperar 6 Segundos
 						"21":
 							Escribir ""
-							SumaDeNumCedula
+							suma=SumaDeNumCedula
 							Esperar 6 Segundos
 						"22":
 							Escribir "Invertir una palabra"
 							InvertirPalabra
 							Esperar 6 Segundos
 						"23":
-							Escribir "Posición de una frase"
+							Escribir "PosiciÃ³n de una frase"
+
 							x=Pocicion(frase)
 							Esperar 6 Segundos
 							
